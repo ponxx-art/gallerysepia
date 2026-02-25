@@ -1,21 +1,28 @@
 const express = require("express");
 const path = require('path');
+const compression = require('compression');
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-var publicDir = path.join(__dirname, 'public');
-app.use("/public/", express.static(publicDir));
+app.use(compression());
 
-/*
-  -> IMPORTANT
-  -> it is a security risk to serve node_modules via express. You should use a bundler like webpack or browserify
-*/
-var nodeModulesDir = path.join(__dirname, 'node_modules');
-app.use('/node_modules/', express.static(nodeModulesDir)); 
+const publicDir = path.join(__dirname, 'public');
+app.use("/public/", express.static(publicDir, {
+  maxAge: '1d',
+  etag: false
+}));
+
+const nodeModulesDir = path.join(__dirname, 'node_modules');
+app.use('/node_modules/', express.static(nodeModulesDir, {
+  maxAge: '1d',
+  etag: false
+}));
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(3000, function () {
-  console.log("Server is running on localhost3000");
+app.listen(PORT, function () {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

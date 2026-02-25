@@ -29,7 +29,7 @@ let modelLoaded = false;
 
 const loader = new GLTFLoader();
 loader.load(
-  '/public/models/scene (1).gltf',
+  '/public/models/Galería Sepia2..glb',
   (gltf) => {
     scene.add(gltf.scene);
     modelLoaded = true;

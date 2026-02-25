@@ -38,7 +38,7 @@ let modelLoaded = false;
 let gltfScene = null;
 
 const modelPath =
-  import.meta.env.VITE_MODEL_PATH || "/public/models/gal_compressed.glb";
+  import.meta.env.BASE_URL + "models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();

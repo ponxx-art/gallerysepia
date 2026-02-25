@@ -4,12 +4,16 @@
   "description": "3D Gallery with Three.js and pointer lock controls",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "node app.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "compression": "^1.8.1",
     "express": "^4.18.2",
     "three": "^0.153.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
   }
 }

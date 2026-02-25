@@ -27,9 +27,11 @@ scene.add(fillLight);
 
 let modelLoaded = false;
 
+const modelPath = import.meta.env.VITE_MODEL_PATH || '/public/models/Galería Sepia2..glb';
+
 const loader = new GLTFLoader();
 loader.load(
-  '/public/models/Galería Sepia2..glb',
+  modelPath,
   (gltf) => {
     scene.add(gltf.scene);
     modelLoaded = true;

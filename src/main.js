@@ -1,15 +1,23 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x1a1a1a);
 scene.fog = new THREE.Fog(0x1a1a1a, 1, 50);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.01,
+  1000,
+);
 
-const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#background'), antialias: true });
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector("#background"),
+  antialias: true,
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -29,11 +37,14 @@ scene.add(fillLight);
 let modelLoaded = false;
 let gltfScene = null;
 
-const modelPath = import.meta.env.VITE_MODEL_PATH || '/public/models/Galería Sepia2..glb';
+const modelPath =
+  import.meta.env.VITE_MODEL_PATH || "/public/models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+dracoLoader.setDecoderPath(
+  "https://www.gstatic.com/draco/versioned/decoders/1.5.6/",
+);
 loader.setDRACOLoader(dracoLoader);
 loader.load(
   modelPath,
@@ -58,39 +69,41 @@ loader.load(
   },
   undefined,
   (error) => {
-    console.error('Error loading model:', error);
-    const errorEl = document.createElement('div');
-    errorEl.id = 'error';
-    errorEl.textContent = 'Error loading 3D model';
-    errorEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff5555;font-family:sans-serif;font-size:24px;';
+    console.error("Error loading model:", error);
+    const errorEl = document.createElement("div");
+    errorEl.id = "error";
+    errorEl.textContent = "Error loading 3D model";
+    errorEl.style.cssText =
+      "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff5555;font-family:sans-serif;font-size:24px;";
     document.body.appendChild(errorEl);
-  }
+  },
 );
 
 const controls = new PointerLockControls(camera, document.body);
 
-const instructions = document.createElement('div');
-instructions.id = 'instructions';
-instructions.innerHTML = '<div>Click to enter</div><div style="font-size:14px;margin-top:10px">WASD / Arrow keys to move<br>Mouse to look around<br>Space to jump<br>Esc to exit</div>';
+const instructions = document.createElement("div");
+instructions.id = "instructions";
+instructions.innerHTML =
+  '<div>Click to enter</div><div style="font-size:14px;margin-top:10px">WASD / Arrow keys to move<br>Mouse to look around<br>Space to jump<br>Esc to exit</div>';
 document.body.appendChild(instructions);
 
-instructions.addEventListener('click', () => {
+instructions.addEventListener("click", () => {
   controls.lock();
 });
 
-controls.addEventListener('lock', () => {
-  instructions.style.display = 'none';
+controls.addEventListener("lock", () => {
+  instructions.style.display = "none";
 });
 
-controls.addEventListener('unlock', () => {
-  instructions.style.display = 'block';
+controls.addEventListener("unlock", () => {
+  instructions.style.display = "block";
 });
 
 const moveState = {
   forward: false,
   backward: false,
   left: false,
-  right: false
+  right: false,
 };
 
 const velocity = new THREE.Vector3();
@@ -105,25 +118,25 @@ let groundLevel = 0;
 const raycaster = new THREE.Raycaster();
 const downVector = new THREE.Vector3(0, -1, 0);
 
-document.addEventListener('keydown', (event) => {
+document.addEventListener("keydown", (event) => {
   switch (event.code) {
-    case 'ArrowUp':
-    case 'KeyW':
+    case "ArrowUp":
+    case "KeyW":
       moveState.forward = true;
       break;
-    case 'ArrowDown':
-    case 'KeyS':
+    case "ArrowDown":
+    case "KeyS":
       moveState.backward = true;
       break;
-    case 'ArrowLeft':
-    case 'KeyA':
+    case "ArrowLeft":
+    case "KeyA":
       moveState.left = true;
       break;
-    case 'ArrowRight':
-    case 'KeyD':
+    case "ArrowRight":
+    case "KeyD":
       moveState.right = true;
       break;
-    case 'Space':
+    case "Space":
       if (canJump) {
         velocity.y = jumpForce;
         canJump = false;
@@ -132,30 +145,30 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-document.addEventListener('keyup', (event) => {
+document.addEventListener("keyup", (event) => {
   switch (event.code) {
-    case 'ArrowUp':
-    case 'KeyW':
+    case "ArrowUp":
+    case "KeyW":
       moveState.forward = false;
       break;
-    case 'ArrowDown':
-    case 'KeyS':
+    case "ArrowDown":
+    case "KeyS":
       moveState.backward = false;
       break;
-    case 'ArrowLeft':
-    case 'KeyA':
+    case "ArrowLeft":
+    case "KeyA":
       moveState.left = false;
       break;
-    case 'ArrowRight':
-    case 'KeyD':
+    case "ArrowRight":
+    case "KeyD":
       moveState.right = false;
       break;
   }
 });
 
-document.addEventListener('pointerlockchange', () => {
+document.addEventListener("pointerlockchange", () => {
   if (!document.pointerLockElement) {
-    instructions.style.display = 'block';
+    instructions.style.display = "block";
   }
 });
 
@@ -169,7 +182,9 @@ function animate() {
 
   if (controls.isLocked) {
     raycaster.set(camera.position, downVector);
-    const intersects = gltfScene ? raycaster.intersectObject(gltfScene, true) : [];
+    const intersects = gltfScene
+      ? raycaster.intersectObject(gltfScene, true)
+      : [];
     if (intersects.length > 0) {
       groundLevel = intersects[0].point.y;
     }
@@ -205,7 +220,7 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);

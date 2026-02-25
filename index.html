@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<html>
-	<link rel="stylesheet" type="text/css" href="/public/src/style.css">
-	<head lang="en">
+<html lang="en">
+	<head>
 		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-		<!-- 
-			Import map is not available in all browsers.
-			This is necessary to serve the three path so that other imports can access it. 
-		-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Gallery</title>
+		<link rel="stylesheet" type="text/css" href="/public/src/style.css">
 		<script type="importmap">
 			{
 				"imports": {
@@ -21,7 +15,6 @@
 		</script>
 	</head>
 	<body>
-		<!-- Canvas is necessary to hold a scene  -->
 		<canvas id="background"></canvas>
 		<script type="module" src="/public/src/main.js"></script>
 	</body>

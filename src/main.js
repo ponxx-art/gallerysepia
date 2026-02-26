@@ -43,7 +43,7 @@ let gltfScene = null;
 
 const modelPath =
   (typeof import.meta !== "undefined" && import.meta.env?.VITE_MODEL_PATH) ||
-  "gallerysepia/public/models/gal_compressed.glb";
+  "public/models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();

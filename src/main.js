@@ -8,10 +8,10 @@ scene.background = new THREE.Color(0x1a1a1a);
 scene.fog = new THREE.Fog(0x1a1a1a, 1, 50);
 
 const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.01,
-  1000,
+  75, // FOV
+  window.innerWidth / window.innerHeight, // Aspect Ratio
+  0.01, // Near Clipping Plane
+  1000, // Far Clipping Plane
 );
 
 const renderer = new THREE.WebGLRenderer({
@@ -37,7 +37,7 @@ scene.add(fillLight);
 let modelLoaded = false;
 let gltfScene = null;
 
-const modelPath = "/gallerysepia/public/models/gal_compressed.glb";
+const modelPath = import.meta.env.VITE_MODEL_PATH || "/models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
@@ -57,7 +57,7 @@ loader.load(
     const size = box.getSize(new THREE.Vector3());
 
     camera.position.copy(center);
-    camera.position.y += 2.0;
+    camera.position.y += 3.5;
 
     const maxDim = Math.max(size.x, size.y, size.z);
     camera.near = maxDim * 0.01;

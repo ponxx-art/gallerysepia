@@ -37,7 +37,7 @@ scene.add(fillLight);
 let modelLoaded = false;
 let gltfScene = null;
 
-const modelPath = "/public/models/gal_compressed.glb";
+const modelPath = "/gallerysepia/public/models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();

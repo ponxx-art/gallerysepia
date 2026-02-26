@@ -24,15 +24,19 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1;
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.8));
+scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.5));
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(5, 10, 7.5);
 scene.add(directionalLight);
 
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
 fillLight.position.set(-5, 0, -5);
 scene.add(fillLight);
+
+const backLight = new THREE.DirectionalLight(0xffffff, 1);
+backLight.position.set(0, 5, -10);
+scene.add(backLight);
 
 let modelLoaded = false;
 let gltfScene = null;

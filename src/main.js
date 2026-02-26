@@ -37,7 +37,7 @@ scene.add(fillLight);
 let modelLoaded = false;
 let gltfScene = null;
 
-const modelPath = `${import.meta.env.BASE_URL}${import.meta.env.VITE_MODEL_PATH}`;
+const modelPath = "/public/models/gal_compressed.glb";
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();

@@ -63,7 +63,7 @@ loader.load(
     const size = box.getSize(new THREE.Vector3());
 
     camera.position.copy(center);
-    camera.position.y += 3.5;
+    camera.position.y += 3;
 
     const maxDim = Math.max(size.x, size.y, size.z);
     camera.near = maxDim * 0.01;
@@ -194,9 +194,9 @@ function animate() {
       groundLevel = intersects[0].point.y;
     }
 
-    if (camera.position.y <= groundLevel + 2.0) {
+    if (camera.position.y <= groundLevel + 3.5) {
       velocity.y = Math.max(0, velocity.y);
-      camera.position.y = groundLevel + 2.0;
+      camera.position.y = groundLevel + 3.5;
       canJump = true;
     } else {
       velocity.y -= gravity * delta;
